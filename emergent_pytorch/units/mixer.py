@@ -46,7 +46,7 @@ class MixerLink(nn.Module):
         super().__init__()
         self.out_tokens = out_tokens
         in_rows, out_rows = sum(to_list(in_tokens)), sum(to_list(out_tokens))
-        self.mixer = Mixer(
+        self.mixer = MixerModule(
             in_rows=in_rows, out_rows=out_rows, in_cols=features, activation=activation
         )
         self.activation = activation
