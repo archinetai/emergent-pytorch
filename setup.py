@@ -11,7 +11,7 @@ setup(
     author_email="archinetai@protonmail.com",
     url="https://github.com/archinetai/emergent-pytorch",
     keywords=["artificial intelligence", "deep learning", "distributed learning"],
-    install_requires=["torch>=1.6", "data-science-types>=0.2"],
+    install_requires=["torch>=1.1", "einops>=0.4" "data-science-types>=0.2"],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
