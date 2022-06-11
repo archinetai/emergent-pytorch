@@ -44,10 +44,10 @@ class InvertibleModule(nn.Module):
 
 
 class Unit(InvertibleModule):
-    def __init__(self, lr: float = 0.001):
+    def __init__(self, lr):
         super().__init__()
         self.lr = lr
-        self.recon: Optional[Union[Tensor, Tuple[Tensor]]] = None
+        self._recon: Optional[Union[Tensor, Tuple[Tensor]]] = None
 
     def __call__(self, *args):
         forward_fn = self.inverse if self.reverse else self.forward
@@ -59,13 +59,14 @@ class Unit(InvertibleModule):
             ys = forward_fn(*args)
         return ys
 
-    def __neg__(self) -> Optional[Union[Tensor, Tuple[Tensor]]]:
-        return self.recon
+    @property
+    def recon(self) -> Optional[Union[Tensor, Tuple[Tensor]]]:
+        return self._recon
 
     def step(self, xs: Tuple[Tensor], ys: Tuple[Tensor]) -> None:
         # Reconstruct input
         inverse_fn = self.forward if self.reverse else self.inverse
-        self.recon = inverse_fn(*ys)
+        self._recon = inverse_fn(*ys)
         zs = to_tuple(self.recon)
         # Compute loss mean
         loss_fn = self.get_loss_fn()

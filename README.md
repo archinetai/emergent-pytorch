@@ -15,3 +15,9 @@ $ pip install emergent-pytorch
 ## Usage
 
 TODO
+
+## TODO 
+
+- [ ] add vector quantization unit 
+- [ ] test with recursion/repetition like diffusion 
+
